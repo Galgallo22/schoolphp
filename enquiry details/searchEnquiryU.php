@@ -24,7 +24,7 @@
                     <select name="enquiry_id" class="form-control" required id="">
                         <?php
                         include("dbcon.php");
-                        $sql = "select enquiry_id from enquiry";
+                        $sql = "select enquiry_id from enquiries";
                         $result = mysqli_query($conn,$sql);
                         if($result->num_rows > 0){
                             while($row = $result->fetch_assoc()){

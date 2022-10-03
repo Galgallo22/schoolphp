@@ -23,29 +23,29 @@
                 <?php
                 include("dbcon.php");
                 // Removing SQL Injections
-                $enqid = mysqli_real_escape_string($conn,$_POST['enqid']);
-                $enqdate = mysqli_real_escape_string($conn,$_POST['enqdate']);
+                $userid = mysqli_real_escape_string($conn,$_POST['userid']);
                 $firstname = mysqli_real_escape_string($conn,$_POST['fname']);
-                $othernames = mysqli_real_escape_string($conn,$_POST['onames']);
-                $tnumber = mysqli_real_escape_string($conn,$_POST['tno']);
-                $email = mysqli_real_escape_string($conn,$_POST['email']);
-                $course = mysqli_real_escape_string($conn,$_POST['course']);
-                $hdyku = mysqli_real_escape_string($conn,$_POST['hdyku']);
-                $comments = mysqli_real_escape_string($conn,$_POST['comments']);
+                $middlename = mysqli_real_escape_string($conn,$_POST['midname']);
+                $lastname = mysqli_real_escape_string($conn,$_POST['lname']);
+                $department = mysqli_real_escape_string($conn,$_POST['department']);
+                $username = mysqli_real_escape_string($conn,$_POST['username']);
+                $password = mysqli_real_escape_string($conn,$_POST['password']);
+                $usergroup = mysqli_real_escape_string($conn,$_POST['usergroup']);
+                
                 
                 
                 // Query String for updating a record in the database table
-                $sql = "update enquiries set enquiry_date='$enqdate',first_name='$firstname',other_names='$othernames',
-                tnumber='$tnumber',email='$email',course='$course',hdyku='$hdyku',comments='$comments',
-                where enquiry_id='$enqid'";
+                $sql = "update users set firts_name='$firstname',first_name='$firstname',middle_name='$middlename'last_name='$lastname',
+                department='$department',user_name='$username',password='$password',usergroup='$usergroup',
+                where user_id='$userid'";
                 // Executing the query string above
                 if(mysqli_query($conn,$sql) == true){
-                    print "<p>Enquiry details updated successfully</p>";
-                    print "<a href='enquiries.php' class='btn btn-outline-info'>Update</a>";
+                    print "<p>Users details updated successfully</p>";
+                    print "<a href='users.php' class='btn btn-outline-info'>Update</a>";
                 }
                 else{
-                    print "<p>Enquiry details not updated</p>";
-                    print "<a href='enquiries.php' class='btn btn-outline-danger'>Try Again</a>";
+                    print "<p>Users details not updated</p>";
+                    print "<a href='users.php' class='btn btn-outline-danger'>Try Again</a>";
                 }
                 // Close the database connection after execution of the query above
                 mysqli_close($conn);

@@ -1,7 +1,7 @@
 <?php
 include("dbcon.php");
-$recno = mysqli_real_escape_string($conn,$_POST['receipt_number']);
-$sql = "select * from receipt where receipt_number='$recno'";
+$enqid = mysqli_real_escape_string($conn,$_POST['enquiry_id']);
+$sql = "select * from enquiries where enquiry_id='$enqid'";
 $result = mysqli_query($conn,$sql);
 if($result->num_rows > 0){
     while($row = $result->fetch_assoc()){
@@ -28,7 +28,7 @@ if($result->num_rows > 0){
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form action="updatereceipt.php" method="post">
+                <form action="updateenquiry.php" method="post">
                 <label for="" hidden><b>Enquiry Id</b></label>
                 <input value="<?php print $row['enquiry_id'];?>" type="number" name="enqid" hidden class="form-control" required id="">
                     <label for="" hidden><b>Enquiry Date</b></label>

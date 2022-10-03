@@ -1,7 +1,7 @@
 <?php
 include("dbcon.php");
-$recno = mysqli_real_escape_string($conn,$_POST['receipt_number']);
-$sql = "select * from receipt where receipt_number='$recno'";
+$enqid = mysqli_real_escape_string($conn,$_POST['enquiry_id']);
+$sql = "select * from enquiries where enquiry_id='$enqid'";
 $result = mysqli_query($conn,$sql);
 if($result->num_rows > 0){
     while($row = $result->fetch_assoc()){
