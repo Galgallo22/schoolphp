@@ -1,6 +1,6 @@
 <?php
 include 'dbcon.php';
-// $_GLOBAL[]
+
 $enquiry_date_from ='1970-01-01';
 $enquiry_date_to ='2100-01-01';
 
