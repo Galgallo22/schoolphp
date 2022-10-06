@@ -1,3 +1,10 @@
+<?php 
+
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access']>=4 ) {
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,21 +37,22 @@
                 $regfees = mysqli_real_escape_string($conn,$_POST['regfees']);
                 $hosfees = mysqli_real_escape_string($conn,$_POST['hfees']);
                 $libraryfees = mysqli_real_escape_string($conn,$_POST['lfees']);
-                $amountpaid =mysqli_real_escape_string($conn,$_POST['apaid']);
+                // $amountpaid =mysqli_real_escape_string($conn,$_POST['apaid']);
+                $tpayable= mysqli_real_escape_string($conn,$_POST['tpay']);
                 
                 // Query String for adding a new record in the database table
                 $sql = "insert into receipt(first_name,other_names,course,
-                tfees,reg_fees,hfees,lfees,amount_paid)
+                tfees,reg_fees,hfees,lfees,total_amount)
                 values('$firstname','$othernames','$course','$tuitionfees','$regfees',
-                '$hosfees','$libraryfees','$amountpaid')";
+                '$hosfees','$libraryfees','$tpayable')";
                 // Executing the query string above
                 if(mysqli_query($conn,$sql) == true){
                     print "<p>New receipt added successfully</p>";
-                    print "<a href='receipt.php' class='btn btn-outline-primary'>Add New</a>";
+                    print "<a href='receipt FORM.php' class='btn btn-outline-primary'>Add New</a>";
                 }
                 else{
                     print "<p>New receipt not added</p>";
-                    print "<a href='receipt.php' class='btn btn-outline-danger'>Try Again</a>";
+                    print "<a href='receipt FORM.php' class='btn btn-outline-danger'>Try Again</a>";
                 }
                 // Close the database connection after execution of the query above
                 mysqli_close($conn);
@@ -56,3 +64,11 @@
 </body>
 
 </html>
+<?php
+}else{
+
+    header("Location:../index.php?error=UNAUTHORISED");
+
+ exit();
+}
+?>

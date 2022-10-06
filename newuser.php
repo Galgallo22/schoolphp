@@ -20,24 +20,25 @@
             //Removing SQL strings
             include("dbcon.php");
                 // Removing SQL Injections
+               
                 $firstname = mysqli_real_escape_string($conn,$_POST['fname']);
                 $middlename = mysqli_real_escape_string($conn,$_POST['midname']);
                 $lastname = mysqli_real_escape_string($conn,$_POST['lname']);
                 $department = mysqli_real_escape_string($conn,$_POST['department']);
-                $username = mysqli_real_escape_string($conn,$_POST['username']);
                 $password = mysqli_real_escape_string($conn,$_POST['password']);
+                $username = mysqli_real_escape_string($conn,$_POST['username']);
                 $usergroup = mysqli_real_escape_string($conn,$_POST['usergroup']);
                 // Query String for adding a new record in the database table
                 $sql = "insert into users(first_name,middle_name,last_name,department,user_name,password,user_group)
                 values('$firstname','$middlename','$lastname','$department','$username','$password','$usergroup')";
                 // Executing the query string above
                 if(mysqli_query($conn,$sql) == true){
-                    print "<p>New users added successfully</p>";
-                    print "<a href='users.php' class='btn btn-outline-primary'>Add New</a>";
+                    print "<p class = 'text-white text-center'>New user added successfully</p>";
+                    print "<a href = 'index.php' class = 'btn btn-outline-primary'>Login</a>";
                 }
                 else{
-                    print "<p>Users details not added</p>";
-                    print "<a href='users.php' class='btn btn-outline-danger'>Try Again</a>";
+                    print "<p class = 'text-white text-center'>User not added</p>";
+                    print "<a href = 'index.php' class = 'btn btn-outline-danger'>Login</a>";
                 }
                 // Close the database connection after execution of the query above
                 mysqli_close($conn);

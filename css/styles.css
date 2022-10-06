@@ -31,3 +31,15 @@ hr{
     align-items: center;
     justify-content: space-between;
 }
+.login_buttons {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.login_buttons button{
+    width:100%;
+    margin: 0 5px;
+}

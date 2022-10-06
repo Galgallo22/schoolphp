@@ -12,7 +12,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success</title>
+    <title>Delete Success</title>
     <link rel="stylesheet" href="../bs/css/bootstrap.css">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../bs/js/jquery-3.6.0.js"></script>
@@ -22,32 +22,24 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access
 
 <body>
     <div class="container">
-        <h3 class="text-center">Success</h3>
+        <h3 class="text-center">Delete Success</h3>
         <hr>
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <?php
                 include("dbcon.php");
-                // Removing SQL Injections
-                $firstname = mysqli_real_escape_string($conn,$_POST['fname']);
-                $othernames = mysqli_real_escape_string($conn,$_POST['onames']);
-                $course = mysqli_real_escape_string($conn,$_POST['course']);
-                $tuitionfees = mysqli_real_escape_string($conn,$_POST['tfees']);
-                $regfees = mysqli_real_escape_string($conn,$_POST['regfees']);
-                $hfees = mysqli_real_escape_string($conn,$_POST['hfees']);
-                $libraryfees = mysqli_real_escape_string($conn,$_POST['lfees']);
-            
-                // Query String for adding a new record in the database table
-                $sql = "insert into bill(first_name,other_names,course,tfees,reg_fees,hfees,lfees)
-                values('$firstname','$othernames','$course','$tuitionfees','$regfees','$libraryfees')";
+                // Removing SQL Injections                
+                $inno = mysqli_real_escape_string($conn,$_POST['invoice_number']);
+                // Query String for deleting a record in the database table
+                $sql = "delete from bill where invoice_number='$inno'";
                 // Executing the query string above
                 if(mysqli_query($conn,$sql) == true){
-                    print "<p>New bill added successfully</p>";
-                    print "<a href='bill FORM.php' class='btn btn-outline-primary'>Add New</a>";
+                    print "<p>Bill details deleted successfully</p>";
+                    print "<a href='bill FORM.php' class='btn btn-danger'>Delete</a>";
                 }
                 else{
-                    print "<p>Bill staff not added</p>";
+                    print "<p>Bill details not deleted</p>";
                     print "<a href='bill FORM.php' class='btn btn-outline-danger'>Try Again</a>";
                 }
                 // Close the database connection after execution of the query above
@@ -60,6 +52,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access
 </body>
 
 </html>
+
 <?php
 }else{
 

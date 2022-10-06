@@ -1,3 +1,10 @@
+<?php 
+
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access']>=4 ) {
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,11 +48,11 @@
                 // Executing the query string above
                 if(mysqli_query($conn,$sql) == true){
                     print "<p>Staff details updated successfully</p>";
-                    print "<a href='receipt.php' class='btn btn-outline-info'>Update</a>";
+                    print "<a href='receipt FORM.php' class='btn btn-outline-info'>Update</a>";
                 }
                 else{
                     print "<p>Staff details not updated</p>";
-                    print "<a href='receipt.php' class='btn btn-outline-danger'>Try Again</a>";
+                    print "<a href='receipt FORM.php' class='btn btn-outline-danger'>Try Again</a>";
                 }
                 // Close the database connection after execution of the query above
                 mysqli_close($conn);
@@ -57,3 +64,11 @@
 </body>
 
 </html>
+<?php
+}else{
+
+    header("Location:../index.php?error=UNAUTHORISED");
+
+ exit();
+}
+?>

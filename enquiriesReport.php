@@ -1,3 +1,10 @@
+<?php 
+
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access'] == 1 or $_SESSION['access']>=4) {
+
+ ?>
 <?php
 include 'dbcon.php';
 
@@ -52,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             </tr>
             <?php
             // include("dbcon.php");
+            // select * from receipt where balance >0;
             $sql = "select * from enquiries where enquiry_date >= '$enquiry_date_from' AND enquiry_date <= '$enquiry_date_to'";
             // where enquiry_date >= '2022-09-30 16:52:00'
             $result = mysqli_query($conn,$sql);
@@ -79,3 +87,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 </body>
 
 </html>
+<?php
+}else{
+
+    header("Location:index.php?error=UNAUTHORISED");
+
+ exit();
+}
+
+?>

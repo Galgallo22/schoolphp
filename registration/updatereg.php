@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+
+<?php 
+
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access']>=3 ) {
+
+ ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -46,7 +53,7 @@
                 $sql = "update enquiries set reg_date='$regdate',first_name='$firstname',other_names='$othernames',gender='$gender',dob='$dob',postal_address='$postaladdress,
                 tnumber='$tnumber',email='$email',nok='$nok',nk_number=$nkno',cef=$cef',kmg='$kmg',elevel='$elevel,
                 hschool_attended='$hsattended','year_to='$yearto',year_from='$yearfrom',college_attended='$cattended'
-                where recno='$recno'";
+                where studadmin='$studadmin'";
                 // Executing the query string above
                 if(mysqli_query($conn,$sql) == true){
                     print "<p>Staff details updated successfully</p>";
@@ -66,3 +73,12 @@
 </body>
 
 </html>
+<?php
+}else{
+
+    header("Location:../index.php?error=UNAUTHORISED");
+
+ exit();
+}
+
+?>

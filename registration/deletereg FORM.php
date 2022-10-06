@@ -2,7 +2,7 @@
 
 session_start();
 
-if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access']>=4 ) {
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access'] >= 3) {
 
  ?>
 <!DOCTYPE html>
@@ -30,17 +30,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access
                 <?php
                 include("dbcon.php");
                 // Removing SQL Injections                
-                $recno = mysqli_real_escape_string($conn,$_POST['receipt_number']);
+                $studadmin = mysqli_real_escape_string($conn,$_POST['stud_admin']);
                 // Query String for deleting a record in the database table
-                $sql = "delete from receipt where receipt_number='$recno'";
+                $sql = "delete from registration where stud_admin='$studadmin'";
                 // Executing the query string above
                 if(mysqli_query($conn,$sql) == true){
-                    print "<p>Receipt details deleted successfully</p>";
-                    print "<a href='receipt.php' class='btn btn-danger'>Delete</a>";
+                    print "<p>registration details deleted successfully</p>";
+                    print "<a href='registration.php' class='btn btn-danger'>Delete</a>";
                 }
                 else{
-                    print "<p>Receipt details not deleted</p>";
-                    print "<a href='receipt FORM.php' class='btn btn-outline-danger'>Try Again</a>";
+                    print "<p>Bill details not deleted</p>";
+                    print "<a href='registration.php' class='btn btn-outline-danger'>Try Again</a>";
                 }
                 // Close the database connection after execution of the query above
                 mysqli_close($conn);
@@ -59,4 +59,5 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['access
 
  exit();
 }
+
 ?>
